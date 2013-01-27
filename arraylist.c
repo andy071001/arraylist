@@ -1,52 +1,52 @@
 /*
-Description£ºÔÚÃ»ÓĞÏÔÊ½µÄÖ¸ÕëÊı¾İÀàĞÍÊ±ÊµÏÖË«ÏòÁ´±íÊı¾İ½á¹¹
-Date£º2012/10/7
-Author£ºRoger Liu 
+Descriptionï¼šåœ¨æ²¡æœ‰æ˜¾å¼çš„æŒ‡é’ˆæ•°æ®ç±»å‹æ—¶å®ç°åŒå‘é“¾è¡¨æ•°æ®ç»“æ„
+Dateï¼š2012/10/7
+Authorï¼šRoger Liu 
 */ 
 
 #include <stdio.h> 
 
 #define space 10
-#define nill -1//ÓÃ-1´ú±í¿ÕÖ¸Õë 
+#define nill -1//ç”¨-1ä»£è¡¨ç©ºæŒ‡é’ˆ 
  
 typedef int elementType;
 typedef int listType; 
 
 listType allocate_object();
-void free_object(listType);//ÎªÁ´±í½áµã·ÖÅä¿Õ¼äÒÔ¼°ÊÍ·Å½áµã 
+void free_object(listType);//ä¸ºé“¾è¡¨ç»“ç‚¹åˆ†é…ç©ºé—´ä»¥åŠé‡Šæ”¾ç»“ç‚¹ 
 
 listType list_search(elementType);
 void list_insert(listType);
-void list_delete(listType); //Á´±í»ù±¾²Ù×÷£ºËÑË÷ÔªËØ£¬²åÈëÔªËØÒÔ¼°É¾³ıÔªËØ 
+void list_delete(listType); //é“¾è¡¨åŸºæœ¬æ“ä½œï¼šæœç´¢å…ƒç´ ï¼Œæ’å…¥å…ƒç´ ä»¥åŠåˆ é™¤å…ƒç´  
 
 listType next[space];
 elementType key[space];
-listType prev[space];//Èı¸öÊı×é·Ö±ğ´æ´¢ 
-listType L = nill;//L´æ´¢Á´±íµÄÍ·½áµãÖ¸Õë £¬³õÊ¼-1±íÊ¾Á´±íÎª¿Õ 
-listType free = 0;//free´æ´¢¿ÕÓàÎ´·ÖÅä¿Õ¼ä£¨¼´×ÔÓÉ±í£©µÄÍ·Ö¸Õë£¬³õÊ¼ÖµÎªÊı×é¿Õ¼äÊ×µØÖ·£¬0 
+listType prev[space];//ä¸‰ä¸ªæ•°ç»„åˆ†åˆ«å­˜å‚¨ 
+listType L = nill;//Lå­˜å‚¨é“¾è¡¨çš„å¤´ç»“ç‚¹æŒ‡é’ˆ ï¼Œåˆå§‹-1è¡¨ç¤ºé“¾è¡¨ä¸ºç©º 
+listType free = 0;//freeå­˜å‚¨ç©ºä½™æœªåˆ†é…ç©ºé—´ï¼ˆå³è‡ªç”±è¡¨ï¼‰çš„å¤´æŒ‡é’ˆï¼Œåˆå§‹å€¼ä¸ºæ•°ç»„ç©ºé—´é¦–åœ°å€ï¼Œ0 
 
 int main()
 {
     int i;
     int a[5] = {1,2,3,4,5}; 
     listType x, iterate;
-    //½¨Á¢×ÔÓÉ±í£¬³õÊ¼Á´±íÎª¿Õ 
+    //å»ºç«‹è‡ªç”±è¡¨ï¼Œåˆå§‹é“¾è¡¨ä¸ºç©º 
     
     for (i = 0; i < space-1; i++)
     {
         next[i] = i + 1;
     }    
-    next[space-1] = nill;//×ÔÓÉ±í±íÎ² 
+    next[space-1] = nill;//è‡ªç”±è¡¨è¡¨å°¾ 
     
-    //¸ù¾İÊı×éaµÄÔªËØÖµ½¨Á¢Á´±í 
-    L = allocate_object();//·ÖÅäÒ»¸ö½áµã£¬²¢ÈÃLÖ¸ÏòËü
+    //æ ¹æ®æ•°ç»„açš„å…ƒç´ å€¼å»ºç«‹é“¾è¡¨ 
+    L = allocate_object();//åˆ†é…ä¸€ä¸ªç»“ç‚¹ï¼Œå¹¶è®©LæŒ‡å‘å®ƒ
     key[L] = a[0];
     prev[L] = next[L] = nill;
     iterate = L;
      
     for (i = 1; i < 5; i++)
     {
-        x = allocate_object();//·ÖÅäÒ»¸ö½áµã
+        x = allocate_object();//åˆ†é…ä¸€ä¸ªç»“ç‚¹
         if(x != nill){
             key[x] = a[i]; 
             next[iterate] = x;
@@ -68,9 +68,10 @@ int main()
     
     x = allocate_object();
     key[x] = 0;
-    list_insert(x);//±íÍ·²åÈëÔªËØ0
+    list_insert(x);//è¡¨å¤´æ’å…¥å…ƒç´ 0
     x = list_search(4);
-    list_delete(x); 
+    if (x != nill)
+        list_delete(x); 
     
     printf("\n\nafter basic list operation, print the elements of the list(supposed to be 0,1,2,3,5)\n");
     iterate = L; 
@@ -91,11 +92,11 @@ listType allocate_object()
     listType x;
     
     if (free == nill){
-        printf("\n***out of space***\n");//Òç³ö 
+        printf("\n***out of space***\n");//æº¢å‡º 
         x = -1;
     }else{
         x = free;
-        free = next[free];//ÕâÀï×ÔÓÉ±í²ÉÓÃÕ»²Ù×÷À´·ÖÅäºÍÊÍ·Å½áµã     
+        free = next[free];//è¿™é‡Œè‡ªç”±è¡¨é‡‡ç”¨æ ˆæ“ä½œæ¥åˆ†é…å’Œé‡Šæ”¾ç»“ç‚¹     
     }
     
     return x;
@@ -132,25 +133,9 @@ void list_delete(listType x)
     if (prev[x] != nill)
         next[prev[x]] = next[x];
     else
-        L = next[x];//É¾±íÍ·ÔªËØ²»ÒªÍüÁËÍ·Ö¸ÕëÒÆ¶¯ 
+        L = next[x];//åˆ è¡¨å¤´å…ƒç´ ä¸è¦å¿˜äº†å¤´æŒ‡é’ˆç§»åŠ¨ 
     if (next[x] != nill)
         prev[next[x]] = prev[x];
         
-    free_object(x);//°Ñx¼ÓÈë×ÔÓÉ±í±íÍ·µÈ´ıÏÂ´Î·ÖÅä 
+    free_object(x);//æŠŠxåŠ å…¥è‡ªç”±è¡¨è¡¨å¤´ç­‰å¾…ä¸‹æ¬¡åˆ†é… 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
