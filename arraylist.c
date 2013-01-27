@@ -69,7 +69,7 @@ int main()
     x = allocate_object();
     key[x] = 0;
     list_insert(x);//表头插入元素0
-    x = list_search(4);
+    x = list_search(0);
     if (x != nill)
         list_delete(x); 
     
@@ -125,6 +125,7 @@ void list_insert(listType x)
 {
     next[x] = L;
     prev[x] = nill;
+    prev[L] = x;
     L = x;
 }
 
@@ -132,8 +133,10 @@ void list_delete(listType x)
 {
     if (prev[x] != nill)
         next[prev[x]] = next[x];
-    else
-        L = next[x];//删表头元素不要忘了头指针移动 
+    else{
+        L = next[x];//删表头元素不要忘了头指针移动
+        prev[L] = nill;
+    } 
     if (next[x] != nill)
         prev[next[x]] = prev[x];
         
